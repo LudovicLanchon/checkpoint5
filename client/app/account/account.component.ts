@@ -51,7 +51,7 @@ export class AccountComponent implements OnInit {
     this.sold += 1;
   }
 
-  // getWTF() {
-  //   this.user.sold = 500;
-  // }
+  getWTF() {
+    this.user.sold = 500;
+  }
 }

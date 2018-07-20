@@ -15,6 +15,7 @@ export class ProductslistComponent implements OnInit {
   user: User;
   admin: any;
   product: any;
+  notEnoughMoney = false;
   isLoading = true;
   productsList = [];
 
@@ -25,18 +26,22 @@ export class ProductslistComponent implements OnInit {
     private userService: UserService) { }
 
   ngOnInit() {
+    this.getProducts();
+    this.getUser();
+    this.getAdmin();
+  }
+
+  getProducts() {
     this.productService.getProducts().subscribe((data) => {
       this.productsList = data;
     });
-    this.getUser();
-    this.getAdmin();
   }
 
   getUser() {
     this.userService.getUser(this.auth.currentUser).subscribe(
       (data) => {
         this.user = data;
-        console.log(this.user);
+        console.log(this.user.sold);
       },
       error => console.log(error),
       () => this.isLoading = false,
@@ -83,11 +88,14 @@ export class ProductslistComponent implements OnInit {
   }
 
   buy(product) {
-    this.user.sold -= product.price;
-    this.admin.sold += product.price;
-    product.stock -= 1;
-    console.log(product.price);
-    console.log(this.user.sold);
+    if (product.price > this.user.sold) {
+      alert('You don\'t have enough money bitch !');
+      this.notEnoughMoney = true;
+    } else {
+      this.user.sold -= product.price;
+      this.admin.sold += product.price;
+      product.stock -= 1;
+    }
     this.editUser();
     this.editAdmin();
     this.editProduct(product);

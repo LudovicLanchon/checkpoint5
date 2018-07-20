@@ -1,14 +1,71 @@
-<div class="container" *ngIf="productsList">
+<!-- <div class="container" *ngIf="productsList">
   <div class="row">
-    <div class="list" *ngFor="let product of productsList">
+    <div *ngIf="user">Your sold : {{ user.sold }}</div>
+  </div>
+  <div class="row" *ngIf="productsList && user">
+    <div class="list col-6" *ngFor="let product of productsList">
       <div>Name product : {{ product.name }}</div>
       <div>
         <img src="{{ product.image }}" alt="product">
       </div>
       <div class="price">Product Price : {{ product.price }}</div>
-      <div class="stock">Rest in stock : {{ product.stock }}</div>
-      <button class="btn btn-lg btn-success" (click)="buy(product)" *ngIf="auth.loggedIn">Buy this product</button>
+      <div class="stock" *ngIf="product.stock > 0">Rest in stock : {{ product.stock }}</div>
+      <div class="stock" *ngIf="product.stock === 0">Out of stock !</div>
+      <button class="btn btn-lg btn-success" (click)="buy(product)" *ngIf="auth.loggedIn && product.price < user.sold">Buy this product</button>
+      <button class="btn btn-lg btn-primary" routerLink="/account" *ngIf="product.price > user.sold">Créditer mon compte</button>
     </div>
   </div>
+</div> -->
+
+<div class="container" *ngIf="productsList && user">
+  <div class="row mrg-t-30">
+    <div class="col-12">
+      <h2 *ngIf="user">Hi {{ user.username }}, your sold is : {{ user.sold }} WTF</h2>
+    </div>
+    <div class="col-12">
+      <h3>Enjoy your shopping !</h3>
+    </div>
+  </div>
+  <div class="row mrg-t-30">
+    <div class="col-lg-3">
+      <h1 class="my-4">Shop Name</h1>
+      <div class="list-group">
+        <a href="#" class="list-group-item">Category 1</a>
+        <a href="#" class="list-group-item">Category 2</a>
+        <a href="#" class="list-group-item">Category 3</a>
+      </div>
+    </div>
+    <!-- /.col-lg-3 -->
+    <div class="col-lg-9">
+      <div class="row">
+        <div class="col-lg-4 col-md-6 mb-4" *ngFor="let product of productsList">
+          <div class="card h-100">
+            <a href="#">
+              <img src="{{ product.image }}" alt="product">
+            </a>
+            <div class="card-body">
+              <h4 class="card-title">
+                Name product : {{ product.name }}
+                <!-- <a href="#">Name product : {{ product.name }}</a> -->
+              </h4>
+              <h5>Product Price : {{ product.price }} WTF</h5>
+              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!</p>
+            </div>
+            <div class="price">Product Price : {{ product.price }}</div>
+            <div class="stock" *ngIf="product.stock > 0">Rest in stock : {{ product.stock }}</div>
+            <div class="stock" *ngIf="product.stock === 0">Out of stock !</div>
+            <button class="btn btn-lg btn-success" (click)="buy(product)" *ngIf="auth.loggedIn && product.price < user.sold">Buy this product</button>
+            <button class="btn btn-lg btn-primary" routerLink="/account" *ngIf="product.price > user.sold">Créditer mon compte</button>
+            <div class="card-footer">
+              <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.col-lg-9 -->
+  </div>
+  <!-- /.row -->
 </div>
-<div *ngIf="user">Your sold : {{ user.sold }}</div>
+<!-- /.container -->
