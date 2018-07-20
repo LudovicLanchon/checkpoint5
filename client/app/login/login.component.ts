@@ -22,14 +22,15 @@ export class LoginComponent implements OnInit {
     Validators.minLength(6),
   ]);
 
-  constructor(private auth: AuthService,
-              private formBuilder: FormBuilder,
-              private router: Router,
-              public toast: ToastComponent) { }
+  constructor(
+    private auth: AuthService,
+    private formBuilder: FormBuilder,
+    private router: Router,
+    public toast: ToastComponent) { }
 
   ngOnInit() {
     if (this.auth.loggedIn) {
-      this.router.navigate(['/']);
+      this.router.navigate(['/account']);
     }
     this.loginForm = this.formBuilder.group({
       email: this.email,
@@ -47,7 +48,7 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.auth.login(this.loginForm.value).subscribe(
-      res => this.router.navigate(['/']),
+      res => this.router.navigate(['/account']),
       error => this.toast.setMessage('invalid email or password!', 'danger'),
     );
   }
