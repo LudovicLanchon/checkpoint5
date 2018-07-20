@@ -34,6 +34,13 @@
           <option value="admin">Admin</option>
         </select>
       </div>
+
+      <div class="wallet">
+        <div class="sold">My sold : {{ user.sold }} WTF</div>
+        <div class="button">To add 1 WTF to your wallet, click here :
+          <button class="btn btn-success" (click)="getRich()">Get Rich !</button>
+        </div>
+      </div>
       <button class="btn btn-primary" type="submit" [disabled]="!accountForm.form.valid">
         <i class="fa fa-save"></i> Save
       </button>

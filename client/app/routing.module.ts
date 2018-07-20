@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
-import { CatsComponent } from './cats/cats.component';
+import { ProductsComponent } from './products/products.component';
+import { ProductslistComponent } from './productslist/productslist.component';
 import { RabbitsComponent } from './rabbits/rabbits.component';
 import { AboutComponent } from './about/about.component';
 import { RegisterComponent } from './register/register.component';
@@ -16,7 +17,8 @@ import { AuthGuardAdmin } from './services/auth-guard-admin.service';
 
 const routes: Routes = [
   { path: '', component: AboutComponent },
-  { path: 'cats', component: CatsComponent },
+  { path: 'products', component: ProductsComponent, canActivate: [AuthGuardAdmin] },
+  { path: 'productslist', component: ProductslistComponent },
   { path: 'rabbits', component: RabbitsComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },

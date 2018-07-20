@@ -1,0 +1,14 @@
+<div class="container" *ngIf="productsList">
+  <div class="row">
+    <div class="list" *ngFor="let product of productsList">
+      <div>Name product : {{ product.name }}</div>
+      <div>
+        <img src="{{ product.image }}" alt="product">
+      </div>
+      <div class="price">Product Price : {{ product.price }}</div>
+      <div class="stock">Rest in stock : {{ product.stock }}</div>
+      <button class="btn btn-lg btn-success" (click)="buy(product)" *ngIf="auth.loggedIn">Buy this product</button>
+    </div>
+  </div>
+</div>
+<div *ngIf="user">Your sold : {{ user.sold }}</div>
