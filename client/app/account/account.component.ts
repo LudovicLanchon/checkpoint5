@@ -27,6 +27,7 @@ export class AccountComponent implements OnInit {
     this.userService.getUser(this.auth.currentUser).subscribe(
       (data) => {
         this.user = data;
+        // this.getWTF();
       },
       error => console.log(error),
       () => this.isLoading = false,
@@ -49,4 +50,8 @@ export class AccountComponent implements OnInit {
     }
     this.sold += 1;
   }
+
+  // getWTF() {
+  //   this.user.sold = 500;
+  // }
 }

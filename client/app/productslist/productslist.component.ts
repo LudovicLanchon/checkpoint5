@@ -4,7 +4,6 @@ import { ToastComponent } from '../shared/toast/toast.component';
 import { AuthService } from '../services/auth.service';
 import { UserService } from '../services/user.service';
 import { User } from '../shared/models/user.model';
-import { Product } from '../shared/models/product.model';
 
 @Component({
   selector: 'app-productslist',
@@ -15,6 +14,7 @@ export class ProductslistComponent implements OnInit {
 
   user: User;
   admin: any;
+  product: any;
   isLoading = true;
   productsList = [];
 
@@ -73,6 +73,15 @@ export class ProductslistComponent implements OnInit {
     );
   }
 
+  editProduct(product) {
+    this.productService.editProduct(product).subscribe(
+      (res) => {
+        this.toast.setMessage('account settings saved!', 'success');
+      },
+      error => console.log(error),
+    );
+  }
+
   buy(product) {
     this.user.sold -= product.price;
     this.admin.sold += product.price;
@@ -81,5 +90,6 @@ export class ProductslistComponent implements OnInit {
     console.log(this.user.sold);
     this.editUser();
     this.editAdmin();
+    this.editProduct(product);
   }
 }
